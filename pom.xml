@@ -23,14 +23,19 @@
             <url>https://opensource.org/licenses/MIT</url>
         </license>
     </licenses>
-    <!-- Assuming you want to host on @jenkinsci:
-    <url>https://wiki.jenkins.io/display/JENKINS/TODO+Plugin</url>
+    <developers>
+        <developer>
+            <id>vickychijwani</id>
+            <name>Vicky Chijwani</name>
+            <email>vickychijwani+jenkins@gmail.com</email>
+        </developer>
+    </developers>
+    <url>https://github.com/jenkinsci/labelled-steps-plugin/</url>
     <scm>
-        <connection>scm:git:git://github.com/jenkinsci/${project.artifactId}-plugin.git</connection>
-        <developerConnection>scm:git:git@github.com:jenkinsci/${project.artifactId}-plugin.git</developerConnection>
-        <url>https://github.com/jenkinsci/${project.artifactId}-plugin</url>
+        <connection>scm:git:git://github.com/jenkinsci/labelled-steps-plugin.git</connection>
+        <developerConnection>scm:git:git@github.com:jenkinsci/labelled-steps-plugin.git</developerConnection>
+        <url>https://github.com/jenkinsci/labelled-steps-plugin</url>
     </scm>
-    -->
     <repositories>
         <repository>
             <id>repo.jenkins-ci.org</id>
