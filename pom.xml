@@ -16,7 +16,7 @@
         <java.level>7</java.level>
     </properties>
     <name>Labelled Pipeline Steps Plugin</name>
-    <description>Currently provides a replacement for the `sh` pipeline step to allow displaying a custom label in the BlueOcean UI.</description>
+    <description>Currently provides a replacement for the `sh` and `bat` pipeline steps to allow displaying a custom label in the BlueOcean UI.</description>
     <licenses>
         <license>
             <name>MIT License</name>
