@@ -32,6 +32,7 @@ import org.jenkinsci.plugins.workflow.steps.StepContext;
 import org.jenkinsci.plugins.workflow.steps.StepExecution;
 import org.jenkinsci.plugins.workflow.steps.durable_task.DurableTaskStep;
 import org.kohsuke.stapler.DataBoundConstructor;
+import org.kohsuke.stapler.DataBoundSetter;
 
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
@@ -46,6 +47,7 @@ import java.util.Map;
 public final class LabelledShellStep extends DurableTaskStep {
 
     private final String script;
+    private String label;
 
     @DataBoundConstructor public LabelledShellStep(String script) {
         if (script==null)
@@ -55,6 +57,15 @@ public final class LabelledShellStep extends DurableTaskStep {
 
     public String getScript() {
         return script;
+    }
+
+    public String getLabel() {
+        return label;
+    }
+
+    @DataBoundSetter
+    public void setLabel(String label) {
+        this.label = label;
     }
 
     @Override protected DurableTask task() {
