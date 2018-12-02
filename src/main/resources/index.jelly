@@ -1,4 +1,4 @@
 <?jelly escape-by-default='true'?>
 <div>
-    TODO
+    Provides a replacement for the sh and bat pipeline steps to allow displaying a custom label in the BlueOcean UI.
 </div>

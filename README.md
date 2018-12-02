@@ -1,6 +1,6 @@
 # labelled-steps-plugin
 
-Currently this plugin provides a replacement for the [`sh` step][sh] in Jenkins
+Currently this plugin provides a replacement for the [`sh`][sh] and [`bat`][bat] steps in Jenkins
 pipelines to allow displaying a custom label in the BlueOcean UI.
 
 
@@ -26,5 +26,6 @@ labelledShell label: 'Building the universe from scratch...', script: """
 
 
 [sh]: https://jenkins.io/doc/pipeline/steps/workflow-durable-task-step/#sh-shell-script
+[bat]: https://jenkins.io/doc/pipeline/steps/workflow-durable-task-step/#bat-windows-batch-script
 [JENKINS-36933]: https://issues.jenkins-ci.org/browse/JENKINS-36933
 [JENKINS-37324]: https://issues.jenkins-ci.org/browse/JENKINS-37324

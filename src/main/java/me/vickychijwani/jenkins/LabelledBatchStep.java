@@ -1,7 +1,7 @@
 /*
  * The MIT License
  *
- * Copyright (c) 2013-2014, CloudBees, Inc.
+ * Copyright (c) 2018, offa
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -21,15 +21,12 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+
 package me.vickychijwani.jenkins;
 
-import hudson.EnvVars;
 import hudson.Extension;
-import hudson.model.TaskListener;
-import org.jenkinsci.plugins.durabletask.BourneShellScript;
 import org.jenkinsci.plugins.durabletask.DurableTask;
-import org.jenkinsci.plugins.workflow.steps.StepContext;
-import org.jenkinsci.plugins.workflow.steps.StepExecution;
+import org.jenkinsci.plugins.durabletask.WindowsBatchScript;
 import org.jenkinsci.plugins.workflow.steps.durable_task.DurableTaskStep;
 import org.kohsuke.stapler.DataBoundConstructor;
 import org.kohsuke.stapler.DataBoundSetter;
@@ -39,19 +36,20 @@ import javax.annotation.Nonnull;
 import java.util.Map;
 
 /**
- * Runs a Bourne shell script asynchronously on a slave.
+ * Runs a Batch script asynchronously on a slave.
  *
- * This is a lightly-modified version of the official ShellStep:
- * https://github.com/jenkinsci/workflow-durable-task-step-plugin/blob/master/src/main/java/org/jenkinsci/plugins/workflow/steps/durable_task/ShellStep.java
+ * This is a lightly-modified version of the official BatchStep:
+ * https://github.com/jenkinsci/workflow-durable-task-step-plugin/blob/master/src/main/java/org/jenkinsci/plugins/workflow/steps/durable_task/BatchScriptStep.java
  */
-public final class LabelledShellStep extends DurableTaskStep {
-
+public class LabelledBatchStep extends DurableTaskStep {
     private final String script;
     private String label;
 
-    @DataBoundConstructor public LabelledShellStep(String script) {
-        if (script==null)
+    @DataBoundConstructor
+    public LabelledBatchStep(String script) {
+        if (script == null) {
             throw new IllegalArgumentException();
+        }
         this.script = script;
     }
 
@@ -59,35 +57,29 @@ public final class LabelledShellStep extends DurableTaskStep {
         return script;
     }
 
-    public String getLabel() {
-        return label;
-    }
-
     @DataBoundSetter
     public void setLabel(String label) {
         this.label = label;
     }
 
+    public String getLabel() {
+        return label;
+    }
+
     @Override protected DurableTask task() {
-        return new BourneShellScript(script);
+        return new WindowsBatchScript(script);
     }
 
-    @Override public StepExecution start(StepContext context) throws Exception {
-        String path = context.get(EnvVars.class).get("PATH");
-        if (path != null && path.contains("$PATH")) {
-            context.get(TaskListener.class).getLogger().println("Warning: JENKINS-41339 probably bogus PATH=" + path + "; perhaps you meant to use ‘PATH+EXTRA=/something/bin’?");
-        }
-        return super.start(context);
-    }
 
-    @Extension public static final class DescriptorImpl extends DurableTaskStepDescriptor {
+    @Extension
+    public static final class DescriptorImpl extends DurableTaskStepDescriptor {
 
         @Override public String getDisplayName() {
-            return "Shell Script";
+            return "Batch Script";
         }
 
         @Override public String getFunctionName() {
-            return "labelledShell";
+            return "labelledBatch";
         }
 
         @CheckForNull
@@ -96,6 +88,7 @@ public final class LabelledShellStep extends DurableTaskStep {
             if (namedArgs.containsKey("label")) {
                 return (String) namedArgs.get("label");
             }
+
             return null;
         }
 
