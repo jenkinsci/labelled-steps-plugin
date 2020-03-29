@@ -1,6 +1,6 @@
 # labelled-steps-plugin
 
-Currently this plugin provides a replacement for the [`sh`] [sh], [`bat`][bat] and [`powershell`][powershell] steps in Jenkins
+Currently this plugin provides a replacement for the [`sh`][sh], [`bat`][bat] and [`powershell`][powershell] steps in Jenkins
 pipelines to allow displaying a custom label in the BlueOcean UI.
 
 
