@@ -4,7 +4,7 @@
     <parent>
         <groupId>org.jenkins-ci.plugins</groupId>
         <artifactId>plugin</artifactId>
-        <version>3.4</version>
+        <version>4.88</version>
         <relativePath />
     </parent>
     <groupId>me.vickychijwani.jenkins</groupId>
@@ -12,8 +12,9 @@
     <version>1.1-SNAPSHOT</version>
     <packaging>hpi</packaging>
     <properties>
-        <jenkins.version>2.7.3</jenkins.version>
-        <java.level>7</java.level>
+        <!-- https://www.jenkins.io/doc/developer/plugin-development/choosing-jenkins-baseline/ -->
+        <jenkins.baseline>2.462</jenkins.baseline>
+        <jenkins.version>${jenkins.baseline}.3</jenkins.version>
     </properties>
     <name>Labelled Pipeline Steps Plugin</name>
     <description>Currently provides a replacement for the `sh` and `bat` pipeline steps to allow displaying a custom label in the BlueOcean UI.</description>
@@ -23,20 +24,24 @@
             <url>https://opensource.org/licenses/MIT</url>
         </license>
     </licenses>
-    <developers>
-        <developer>
-            <id>vickychijwani</id>
-            <name>Vicky Chijwani</name>
-            <email>vickychijwani+jenkins@gmail.com</email>
-        </developer>
-    </developers>
     <url>https://github.com/jenkinsci/labelled-steps-plugin/</url>
     <scm>
-        <connection>scm:git:git://github.com/jenkinsci/labelled-steps-plugin.git</connection>
+        <connection>scm:git:https://github.com/jenkinsci/labelled-steps-plugin.git</connection>
         <developerConnection>scm:git:git@github.com:jenkinsci/labelled-steps-plugin.git</developerConnection>
         <url>https://github.com/jenkinsci/labelled-steps-plugin</url>
       <tag>HEAD</tag>
   </scm>
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>io.jenkins.tools.bom</groupId>
+                <artifactId>bom-${jenkins.baseline}.x</artifactId>
+                <version>4228.v0a_71308d905b_</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
     <repositories>
         <repository>
             <id>repo.jenkins-ci.org</id>
@@ -53,12 +58,10 @@
         <dependency>
             <groupId>org.jenkins-ci.plugins.workflow</groupId>
             <artifactId>workflow-step-api</artifactId>
-            <version>2.14</version>
         </dependency>
         <dependency>
             <groupId>org.jenkins-ci.plugins.workflow</groupId>
             <artifactId>workflow-durable-task-step</artifactId>
-            <version>2.14</version>
         </dependency>
     </dependencies>
 </project>
